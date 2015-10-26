@@ -18,19 +18,35 @@
  * @package WordPress
  */
 
-// Load environment specific config else fall through
-if (!stripos('local.', $_SERVER['HTTP_HOST'])) { // look for string start on first character
+
+/**
+ * Load environment specific wp-config
+ * Note: Environment specific config file will not be part of version control and it has
+ * be maintained locally, even this applicable for production envrionment. So deployment
+ * of this file will be handled manually, all this to protect the productive sensitive
+ * config data
+ */
+// production
+if (0 === stripos($_SERVER['HTTP_HOST'], 'www.') || 0 === stripos($_SERVER['HTTP_HOST'], 'celebuzz.in')) { // look for string start on first character
+	require( dirname( __FILE__ ) . '/wp-config-production.php' );
+	return;
+} else if (0 === stripos($_SERVER['HTTP_HOST'], 'stage.')) { // stage - look for string start on first character
+	require( dirname( __FILE__ ) . '/wp-config-stage.php' );
+	return;
+}else if (0 === stripos($_SERVER['HTTP_HOST'], 'local.')) { // local - look for string start on first character
 	require( dirname( __FILE__ ) . '/wp-config-local.php' );
 	return;
 }
 
+// fall-through
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'celebuzz');
+define('DB_NAME', '');
 /** MySQL database username */
-define('DB_USER', 'celebuzz');
+define('DB_USER', '');
 /** MySQL database password */
-define('DB_PASSWORD', 'celebuzz20!%');
+define('DB_PASSWORD', '');
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
 /** Database Charset to use in creating database tables. */
