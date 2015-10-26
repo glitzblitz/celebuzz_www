@@ -18,9 +18,8 @@
  * @package WordPress
  */
 
-
 // Load environment specific config else fall through
-if (!stripos($_SERVER['HTTP_HOST'], 'local.')) { // look for string start on first character
+if (!stripos('local.', $_SERVER['HTTP_HOST'])) { // look for string start on first character
 	require( dirname( __FILE__ ) . '/wp-config-local.php' );
 	return;
 }
