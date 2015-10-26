@@ -18,25 +18,26 @@
  * @package WordPress
  */
 
+
+// Load environment specific config else fall through
+if (!stripos($_SERVER['HTTP_HOST'], 'local.')) { // look for string start on first character
+	require( dirname( __FILE__ ) . '/wp-config-local.php' );
+	return;
+}
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', 'celebuzz');
-
 /** MySQL database username */
 define('DB_USER', 'celebuzz');
-
 /** MySQL database password */
 define('DB_PASSWORD', 'celebuzz20!%');
-
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
-
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
-
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
-
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -54,21 +55,16 @@ define('AUTH_SALT',        'G5LVvxR66JldMY8u97zhIeQt81xziBLf04vGiywy5K5fSIBawZzU
 define('SECURE_AUTH_SALT', 'vS2vS35d7wkegkdwbBQOHlaEvpOwFjzsiUmJmnEz4s27ZoofUb4rkVhTQU8r6LEs');
 define('LOGGED_IN_SALT',   'lojaAwGuzBjvfBZxJ50E8aW4MK0SWCAteeaDdmKBgd9y5AlsAAosyo8ghJv5n95i');
 define('NONCE_SALT',       'cdK4rFtZktnTYqogUdmz3ea0m2FwT39kZGtR1QyE1BN1kkM480h3Qa32t3aAEebr');
-
 /**
  * Other customizations.
  */
 define('FS_METHOD','direct');define('FS_CHMOD_DIR',0755);define('FS_CHMOD_FILE',0644);
 define('WP_TEMP_DIR',dirname(__FILE__).'/wp-content/uploads');
-
 /**
  * Turn off automatic updates since these are managed upstream.
  */
 define('AUTOMATIC_UPDATER_DISABLED', true);
-
-
 /**#@-*/
-
 /**
  * WordPress Database Table prefix.
  *
@@ -76,7 +72,6 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix  = 'wp_';
-
 /**
  * For developers: WordPress debugging mode.
  *
@@ -97,12 +92,9 @@ define('DOMAIN_CURRENT_SITE', 'celebuzz.in');
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
-
 /* That's all, stop editing! Happy blogging. */
-
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
-
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
